@@ -1,24 +1,42 @@
+@import url("https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Noto+Serif:wght@400;700&family=Send+Flowers&display=swap");
+/* font-family: 'Abril Fatface', cursive;
+font-family: 'Send Flowers', cursive; */
+
 * {
   margin: 0;
   padding: 0;
+}
+
+:root {
+  --color0: #005178;
+  --color1: #0092ca;
+  --color2: #7de8fe;
+  --color3: #71b536;
+  --color4: #b1d54a;
+  --font0: "Abril Fatface", cursive;
+  --font1: "Send Flowers", cursive;
+  --font2: "Noto Serif", serif;
 }
 
 body,
 html {
   width: 100%;
   min-height: 100vh;
-  overflow: auto;
-  background-color: #ffffff;
+  font-family: var(--font2);
+}
+
+.CartaoProdutos__foto {
+  width: 250px;
+  height: 180px;
 }
 
 .Home {
-  position: relative;
   background-image: radial-gradient(
     farthest-corner at 40px 40px,
-    #50c5ee 60%,
-    #00d4ff80 100%
+    var(--color4) 60%,
+    var(--color0) 100%
   );
-  min-height: calc(100vh - 60px);
+  height: auto;
   margin: 15px;
   padding: 15px;
   border-radius: 20px;
@@ -26,10 +44,316 @@ html {
   box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3);
 }
 
-.fundo-modal {
-  display: none;
+.Home h2 {
+  color: var(--color0);
+  text-align: center;
+  font-size: 1.2rem;
+  padding: 10px;
+}
+
+.Home__header {
+  height: 20vh;
+  width: 100%;
+}
+
+.Row {
+  height: 100%;
+}
+/* HEADER */
+.Header__logo {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  position: relative;
+}
+
+#logo_header {
+  width: 80px;
+  height: 70%;
+}
+
+.Logo__titulo {
+  color: var(--color0);
+  font-size: 1.4rem;
+  height: 2rem;
+}
+
+#span_bari {
+  position: absolute;
+  top: 34%;
+  font-family: var(--font1);
+  font-size: 3.5rem;
+  font-weight: 500;
+  color: var(--color0);
+  transform: rotate(-6deg);
+}
+
+/* CADASTRAR NOVOS PRODUTOS */
+
+.NovoProduto__container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+.CartaoProduto__foto {
+  width: 200px;
+}
+
+.botao-padrao {
+  padding: 0.3rem;
+  background: var(--color4);
+  border: #00517820 outset 2px;
+  box-shadow: 1px 1px 3px #005178;
+  color: #005178;
+  font-size: 1.1rem;
+  cursor: pointer;
+  border-radius: 3px;
+  width: 25%;
+}
+
+/*  PESQUISAR PRODUTO */
+
+.Produto_escolhido_container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  text-align: center;
+}
+
+.Produto_escolhido_input_espaco {
+  height: 40%;
+}
+
+#inputPesquisar {
+  padding: 5px;
+  outline: none;
+  border: none;
+  border-radius: 3px;
+}
+
+.btn_pesquisar {
+  padding: 5px;
+  background: var(--color1);
+  color: white;
+  font-weight: 400;
+  border-radius: 3px;
+  border: none;
+  cursor: pointer;
+}
+::placeholder {
+  color: var(--color0);
+}
+.Produto_escolhido {
+}
+/* CARD DE VISUALIZAÇÃO DOS PRODUTOS */
+
+.ProdutosLista_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#produtosListaItem {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 25px 50px;
+}
+
+.ProdutosListaItem {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
+  padding: 10px;
+  width: 315px;
+  height: 150px;
+  display: flex;
+  justify-content: space-around;
+  margin: 20px 0;
+  animation: aparecer 2s normal;
+}
+
+.CartaoProdutos {
+  background: #ffffff4d;
+  border-radius: 10px;
+  padding: 10px;
+  width: 315px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.CartaoProduto__infos {
+  border: 1px solid black;
+}
+
+.CartaoProdutos img {
+  width: 250px;
+}
+
+.Infos_texto {
+  color: #005178;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+}
+
+.btn__container {
+}
+
+.CartaoProduto_foto {
+  width: 100px;
+  height: auto;
 }
 
 .CartaoProduto__foto {
-  width: 200px;
+  border-radius: 15px;
+  width: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* MODAL */
+
+.fundo-modal {
+  background: #00000050;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  display: none;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  justify-content: center;
+  align-items: center;
+  overflow-y: auto;
+}
+
+.modal {
+  width: 100%;
+  max-width: 600px;
+  height: auto;
+  min-height: 320px;
+  background: var(--color1);
+  border-radius: 25px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  /* box-shadow: 1px 1px 15px var(--color2); */
+  border: #005178 outset 3px;
+}
+
+.cabecalho-modal {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-image: radial-gradient(
+    farthest-corner at 40px 40px,
+    #50c5ee 60%,
+    #00d4ff80 100%
+  );
+  padding: 1rem;
+  height: 30%;
+}
+
+.cabecalho-modal h2 {
+  color: white;
+}
+
+.corpo-modal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  height: 70%;
+}
+
+.corpo-modal input,
+.corpo-modal textarea {
+  width: 90%;
+  padding: 0.5rem;
+  font-size: 0.8rem;
+  outline: none;
+  border: solid 1px #ccc;
+  margin-bottom: 0.4rem;
+  border-radius: 0.3rem;
+}
+
+.cabecalho-modal span {
+  text-decoration: none;
+  color: white;
+  font-size: 1.5rem;
+  transform: scale(0.7);
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+  transform: scale(0.8);
+}
+
+.cabecalho-modal span:hover {
+  transform: scale(1.1);
+  color: #005178;
+  transition: 0.5s ease-in-out;
+}
+
+.botao-modal {
+  padding: 0.7rem;
+  margin-top: 8px;
+  width: 30%;
+  font-size: 1rem;
+  background-color: #0092ca;
+  color: white;
+  border: solid 1px white;
+  box-shadow: 0.2px 0.2px 4px;
+  border-radius: 0.3rem;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.botao-modal:hover {
+  background: var(--color4);
+  color: #005178;
+  transition: 0.7s ease-in-out;
+}
+
+.corpo-modal-exclusao h2 {
+  color: white;
+}
+.corpo-modal-exclusao div button {
+  padding: 1rem;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn_excluir_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+}
+
+.btn_exclusao {
+  padding: 0.7rem;
+  margin-top: 2rem;
+  width: 30%;
+  font-size: 1rem;
+  background-color: #0092ca;
+  color: white;
+  border: solid 1px white;
+  box-shadow: 0.2px 0.2px 4px;
+  border-radius: 0.3rem;
+  cursor: pointer;
+}
+
+.botao-confirmar-excluir-produto:hover {
+  background: #71b536;
+  transition: 0.7s ease-in-out;
+}
+.botao-cancelar-excluir-produto:hover {
+  background: rgba(241, 42, 42, 0.87);
+  transition: 0.7s ease-in-out;
 }

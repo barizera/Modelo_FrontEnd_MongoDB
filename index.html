@@ -13,132 +13,134 @@
         <div class="Row">
           <div class="Header__logo Logo">
             <img id="logo_header" src="./assets/icons/logopredio.png" />
-            <p class="Logo__titulo">Construtora Cesar Ribeiro</p>
+            <p class="Logo__titulo">Empreendimentos</p>
+            <span id="span_bari">Bari</span>
           </div>
         </div>
       </header>
-      <div class="Novaproduto__container">
+      <div class="NovoProduto__container">
         <button
           onclick="mostrarModalCriacao()"
           class="botao-padrao botao-cadastro"
         >
-          Cadastrar Nova produto
+          Cadastrar Novo empreendimento
         </button>
-        <!-- pesquisar produtos -->
-        <h2>Pesquise uma casa</h2>
-        <div class="Produto_escolhido_container">
-          <div class="Produto_escolhido_input_espaco">
+      </div>
+      <!-- pesquisar produtos -->
+      <h2>Pesquise um empreendimento:</h2>
+      <div class="Produto_escolhido_container">
+        <div class="Produto_escolhido_input_espaco">
+          <input
+            type="text"
+            id="inputPesquisar"
+            placeholder="Digite o nome do empreendimento.."
+          />
+          <button class="btn_pesquisar" onclick="imprmirProdutoPorId()">
+            Pesquisar
+          </button>
+        </div>
+        <div class="Produto_escolhido" id="produto_escolhido"></div>
+      </div>
+      <!-- Mostrar todos os produtos -->
+      <h2>Empreendimentos construídos:</h2>
+      <div class="ProdutosLista_container">
+        <div class="ProdutosListaItem" id="produtosListaItem"></div>
+      </div>
+
+      <!-- Modal criação -->
+      <div class="fundo-modal" id="fundoModalCriacao">
+        <div class="modal">
+          <div class="cabecalho-modal">
+            <h2>Cadastrar um produto</h2>
+            <span onclick="esconderModalCriacao()">X</span>
+          </div>
+          <div class="corpo-modal">
             <input
-              type="text"
-              id="inputPesquisar"
-              placeholder="Digite o id do produto.."
+              class="input-sabor"
+              placeholder="Nome do empreendimento"
+              id="inputNome"
             />
-            <button class="Default_button" onclick="imprmirProdutoPorId()">
-              Pesquisar
+            <textarea
+              class="input-descricao"
+              placeholder="Descrição do empreendimento"
+              id="inputDescricao"
+              rows="4"
+            ></textarea>
+            <input
+              class="input-foto"
+              placeholder="Link da foto do empreendimento"
+              id="inputFoto"
+            />
+            <button class="botao-modal" onclick="cadastrarNovoProduto()">
+              Cadastrar
             </button>
-            <div class="Produto_escolhido" id="produto_escolhido"></div>
           </div>
         </div>
-        <!-- Mostrar todos os produtos -->
-        <h2>Empreendimentos construídos:</h2>
-        <div class="Home_container">
-          <div class="ProdutosListaItem" id="produtosListaItem"></div>
-        </div>
+      </div>
 
-        <!-- Modal criação -->
-        <div class="fundo-modal" id="fundoModalCriacao">
-          <div class="modal">
-            <div class="cabecalho-modal">
-              <h2>Cadastrar um produto</h2>
-              <span onclick="esconderModalCriacao()">X</span>
-            </div>
-            <div class="corpo-modal">
-              <input
-                class="input-sabor"
-                placeholder="Nome do produto"
-                id="inputNome"
-              />
-              <textarea
-                class="input-descricao"
-                placeholder="Descrição do produto"
-                id="inputDescricao"
-                rows="4"
-              ></textarea>
-              <input
-                class="input-foto"
-                placeholder="Link da foto do produto"
-                id="inputFoto"
-              />
-              <button class="botao-modal" onclick="cadastrarNovoProduto()">
-                Cadastrar
+      <!-- Modal exclusao -->
+      <div class="fundo-modal" id="fundoModalExclusao">
+        <div class="modal">
+          <div class="cabecalho-modal">
+            <h2>Confirmação</h2>
+            <span onclick="esconderModalExclusao()">X</span>
+          </div>
+          <div class="corpo-modal corpo-modal-exclusao">
+            <h2>Deseja realmente apagar esse empreendimento</h2>
+            <div class="btn_excluir_container">
+              <button
+                class="botao-cancelar-excluir-produto btn_exclusao"
+                onclick="esconderModalExclusao()"
+              >
+                Não
               </button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Modal exclusao -->
-        <div class="fundo-modal" id="fundoModalExclusao">
-          <div class="modal">
-            <div class="cabecalho-modal">
-              <h2>Confirmação</h2>
-              <span onclick="esconderModalExclusao()">X</span>
-            </div>
-            <div class="corpo-modal corpo-modal-exclusao">
-              <h2>Deseja realmente apagar esse produto</h2>
-              <div>
-                <button
-                  class="botao-cancelar-excluir-produto"
-                  onclick="esconderModalExclusao()"
-                >
-                  Não
-                </button>
-                <button
-                  class="botao-confirmar-excluir-produto"
-                  id="botaoConfirmarExclusao"
-                >
-                  Sim
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Modal edição -->
-        <div class="fundo-modal" id="fundoModalEdicao">
-          <div class="modal">
-            <div class="cabecalho-modal">
-              <h2>Atualizar um produto</h2>
-              <span onclick="esconderModalEdicao()">X</span>
-            </div>
-            <div class="corpo-modal">
-              <input
-                class="input-nome"
-                placeholder="Nome do produto"
-                id="inputNomeEdicao"
-              />
-              <textarea
-                class="input-descricao"
-                placeholder="Descrição do produto"
-                id="inputDescricaoEdicao"
-                rows="4"
-              ></textarea>
-              <input
-                class="input-foto"
-                placeholder="Link da imagem do produto"
-                id="inputFotoEdicao"
-              />
-              <button class="botao-modal" id="botaoConfirmarEdicao">
-                Atualizar
+              <button
+                class="botao-confirmar-excluir-produto btn_exclusao"
+                id="botaoConfirmarExclusao"
+              >
+                Sim
               </button>
             </div>
           </div>
         </div>
       </div>
-      <div class="notificacao" id="notificacao">
-        <span id="notificacaoSpan"></span>
-        <p id="notificacaoP"></p>
+
+      <!-- Modal edição -->
+      <div class="fundo-modal" id="fundoModalEdicao">
+        <div class="modal">
+          <div class="cabecalho-modal">
+            <h2>Atualizar um produto</h2>
+            <span onclick="esconderModalEdicao()">X</span>
+          </div>
+          <div class="corpo-modal">
+            <input
+              class="input-nome"
+              placeholder="Nome do empreendimento"
+              id="inputNomeEdicao"
+            />
+            <textarea
+              class="input-descricao"
+              placeholder="Descrição do empreendimento"
+              id="inputDescricaoEdicao"
+              rows="4"
+            ></textarea>
+            <input
+              class="input-foto"
+              placeholder="Link da imagem do empreendimento"
+              id="inputFotoEdicao"
+            />
+            <button class="botao-modal" id="botaoConfirmarEdicao">
+              Atualizar
+            </button>
+          </div>
+        </div>
       </div>
     </div>
+    <div class="notificacao" id="notificacao">
+      <span id="notificacaoSpan"></span>
+      <p id="notificacaoP"></p>
+    </div>
+
     <script src="./assets/script.js"></script>
   </body>
 </html>
