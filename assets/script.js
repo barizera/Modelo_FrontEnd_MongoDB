@@ -81,7 +81,7 @@ let listaDeProdutos = [];
 // MANIPULAÇÃO DO DOCUMENTO - DOM (HTML)
 const imprimirTodosProdutos = async () => {
   const produtos = await requisicoes.buscarTodosProdutos();
-console.log(produtos)
+  console.log(produtos);
   document.querySelector("#produtosListaItem").innerHTML = "";
 
   produtos.forEach((produtos) => {
@@ -89,6 +89,7 @@ console.log(produtos)
       "beforeend",
       `
       <div class="CartaoProdutos">
+        <img src="${produtos.foto}" alt="${produtos.nome}" class="CartaoProdutos__foto"/>
         <div class="CartaoProdutos__infos">
           <div>${produtos.nome}</div>
           <div>${produtos.descricao}</div>
@@ -97,8 +98,7 @@ console.log(produtos)
             <button onclick="mostrarModalEdicao('${produtos._id}')" class="botao-editar-produtos">EDITAR</button>
           </div>
         </div>
-        <img src="${produtos.foto}" alt="${produtos.nome}" class="CartaoProdutos__foto"/>
-    </div>`
+      </div>`
     );
   });
 };
@@ -108,7 +108,6 @@ const imprmirProdutoPorId = async () => {
   document.querySelector("#produto_escolhido").innerHTML = "";
 
   const nome = document.querySelector("#inputPesquisar").value;
- 
 
   const produtoSelecionado = await listaDeProdutos.find(
     (elem) => elem.nome === nome
@@ -136,6 +135,7 @@ const imprmirProdutoPorId = async () => {
   } else {
     document.querySelector("#produto_escolhido").innerHTML = `
     <div class="CartaoProdutos">
+        <img src="${produto.foto}" alt="${produto.nome}" class="CartaoProdutos__foto"/>
         <div class="CartaoProdutos__infos">
           <div>${produto.nome}</div>
           <div>${produto.descricao}</div>
@@ -144,7 +144,6 @@ const imprmirProdutoPorId = async () => {
             <button onclick="mostrarModalEdicao('${produto._id}')" class="botao-editar-produtos">EDITAR</button>
           </div>
         </div>
-        <img src="${produto.foto}" alt="${produto.nome}" class="CartaoProdutos__foto"/>
     </div>`;
   }
 };
@@ -158,21 +157,18 @@ const cadastrarNovoProduto = async () => {
 
   document.querySelector(".ProdutosListaItem").insertAdjacentHTML(
     "beforeend",
-    `<div class="CartaoProdutos">
-            <div class="CartaoProduto__infos">
-                <div>
-                    <div>${produto.nome}</div>
-                    <div>${produto.descricao}</div>
-                </div>
-                <div class="btn__container">
-                    <button onclick="mostrarModalExclusao('${produto._id}')" class="botao-excluir-produto">APAGAR</button>
-                    <button onclick="mostrarModalEdicao('${produto._id}')" class="botao-editar-produto">EDITAR</button>
-                </div>
+    `
+    <div class="CartaoProdutos">
+        <img src="${produto.foto}" alt="${produto.nome}" class="CartaoProdutos__foto"/>
+        <div class="CartaoProdutos__infos">
+            <div>${produto.nome}</div>
+            <div>${produto.descricao}</div>
+            <div>
+              <button onclick="mostrarModalExclusao('${produto._id}')" class="botao-excluir-produtos">APAGAR</button>
+              <button onclick="mostrarModalEdicao('${produto._id}')" class="botao-editar-produtos">EDITAR</button>
             </div>
-                <div class="CartaoProduto_foto">    
-                    <img src="${produto.foto}" alt="Casa ${produto.nome}" class="CartaoProduto__foto"/>
-                    </div>
-                </div>`
+        </div>
+    </div>`
   );
 
   esconderModalCriacao();
