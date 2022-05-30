@@ -46,7 +46,7 @@ class Requisicoes {
       descricao,
       foto,
     };
-
+    console.log(produto);
     const res = await fetch(`${baseUrl}/atualizar-produto/${id}`, {
       method: "put",
       headers: {
@@ -55,6 +55,7 @@ class Requisicoes {
       mode: "cors",
       body: JSON.stringify(produto),
     });
+
     const novoProduto = await res.json();
     return novoProduto;
   };
@@ -81,7 +82,7 @@ let listaDeProdutos = [];
 // MANIPULAÇÃO DO DOCUMENTO - DOM (HTML)
 const imprimirTodosProdutos = async () => {
   const produtos = await requisicoes.buscarTodosProdutos();
-  console.log(produtos);
+
   document.querySelector("#produtosListaItem").innerHTML = "";
 
   produtos.forEach((produtos) => {
@@ -93,10 +94,10 @@ const imprimirTodosProdutos = async () => {
         <div class="CartaoProdutos__infos">
           <div>${produtos.nome}</div>
           <div>${produtos.descricao}</div>
-          <div>
-            <button onclick="mostrarModalExclusao('${produtos._id}')" class="botao-excluir-produtos">APAGAR</button>
-            <button onclick="mostrarModalEdicao('${produtos._id}')" class="botao-editar-produtos">EDITAR</button>
-          </div>
+        </div>
+        <div class"btn_container"> 
+          <a onclick="mostrarModalExclusao('${produtos._id}')" class="botao-excluir-produtos"><i class="fa-solid fa-trash-can"></i></a>
+          <a onclick="mostrarModalEdicao('${produtos._id}')" class="botao-editar-produtos"><i class="fa-solid fa-pen"></i></a>
         </div>
       </div>`
     );
@@ -119,6 +120,10 @@ const imprmirProdutoPorId = async () => {
     errorMessage.innerHTML = "Produto não encontrado.";
 
     document.querySelector("#produto_escolhido").appendChild(errorMessage);
+    setTimeout(() => {
+      document.querySelector("#inputPesquisar").value = "";
+      errorMessage.innerHTML = "";
+    }, 4000);
   }
 
   const id = produtoSelecionado._id;
@@ -139,13 +144,18 @@ const imprmirProdutoPorId = async () => {
         <div class="CartaoProdutos__infos">
           <div>${produto.nome}</div>
           <div>${produto.descricao}</div>
+        </div>
+        <div class"btn_container"> 
           <div>
-            <button onclick="mostrarModalExclusao('${produto._id}')" class="botao-excluir-produtos">APAGAR</button>
-            <button onclick="mostrarModalEdicao('${produto._id}')" class="botao-editar-produtos">EDITAR</button>
+          <a onclick="mostrarModalExclusao('${produto._id}')" class="botao-excluir-produtos"><i class="fa-solid fa-trash-can"></i></a>
+          <a onclick="mostrarModalEdicao('${produto._id}')" class="botao-editar-produtos"><i class="fa-solid fa-pen"></i></a>
           </div>
         </div>
     </div>`;
   }
+  setTimeout(() => {
+    document.querySelector("#produto_escolhido").innerHTML = "";
+  }, 5000);
 };
 
 const cadastrarNovoProduto = async () => {
@@ -162,16 +172,18 @@ const cadastrarNovoProduto = async () => {
         <img src="${produto.foto}" alt="${produto.nome}" class="CartaoProdutos__foto"/>
         <div class="CartaoProdutos__infos">
             <div>${produto.nome}</div>
-            <div>${produto.descricao}</div>
-            <div>
-              <button onclick="mostrarModalExclusao('${produto._id}')" class="botao-excluir-produtos">APAGAR</button>
-              <button onclick="mostrarModalEdicao('${produto._id}')" class="botao-editar-produtos">EDITAR</button>
-            </div>
+            <div class="CartaoInfo_descricao">${produto.descricao}</div>
+        </div>
+        <div class"btnInfo_container"> 
+            <a onclick="mostrarModalExclusao('${produto._id}')" class="botao-excluir-produtos"><i class="fa-solid fa-trash-can"></i></a>
+            <a onclick="mostrarModalEdicao('${produto._id}')" class="botao-editar-produtos"><i class="fa-solid fa-pen"></i></a>
         </div>
     </div>`
   );
-
+  console.log(produto._id);
+  mostrarNotificacao("sucesso", "Emprendimento cadastrado com sucesso");
   esconderModalCriacao();
+  imprimirTodosProdutos();
 };
 
 const mostrarModalCriacao = () => {
@@ -192,6 +204,8 @@ const mostrarModalExclusao = (id) => {
       mostrarNotificacao("erro", "Produto não encontrado");
     }
 
+    document.querySelector("#produto_escolhido").innerHTML = "";
+
     esconderModalExclusao();
     imprimirTodosProdutos();
   });
@@ -199,8 +213,11 @@ const mostrarModalExclusao = (id) => {
 
 const mostrarModalEdicao = (id) => {
   document.querySelector("#fundoModalEdicao").style.display = "flex";
+  console.log(listaDeProdutos);
 
   const produto = listaDeProdutos.find((elem) => elem._id === id);
+  console.log(produto);
+
   document.querySelector("#inputNomeEdicao").value = produto.nome;
   document.querySelector("#inputDescricaoEdicao").value = produto.descricao;
   document.querySelector("#inputFotoEdicao").value = produto.foto;
@@ -211,8 +228,10 @@ const mostrarModalEdicao = (id) => {
     const nome = document.querySelector("#inputNomeEdicao").value;
     const descricao = document.querySelector("#inputDescricaoEdicao").value;
     const foto = document.querySelector("#inputFotoEdicao").value;
+
     await requisicoes.atualizarProduto(id, nome, descricao, foto);
 
+    mostrarNotificacao("sucess", "Empreendimento atualizado.");
     esconderModalEdicao();
     imprimirTodosProdutos();
   });
@@ -247,6 +266,10 @@ const esconderModalCriacao = () => {
 };
 
 const esconderModalEdicao = () => {
+  document.querySelector("#inputNome").value = "";
+  document.querySelector("#inputDescricao").value = "";
+  document.querySelector("#inputFoto").value = "";
+
   document.querySelector("#fundoModalEdicao").style.display = "none";
 };
 
