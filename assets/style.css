@@ -44,7 +44,7 @@ div.Home {
 .Home h2 {
   color: var(--color0);
   text-align: center;
-  font-size: 1.2rem;
+
   padding: 10px;
 }
 
@@ -65,11 +65,6 @@ div.Home {
   align-items: center;
   height: 100%;
   position: relative;
-}
-
-#logo_header {
-  /* width: 80px;
-  height: 70%; */
 }
 
 .Logo__titulo {
@@ -128,6 +123,8 @@ div.Home {
   outline: none;
   border: none;
   border-radius: 3px;
+  height: 2rem;
+  width: 20rem;
 }
 
 .btn_pesquisar {
@@ -138,9 +135,15 @@ div.Home {
   border-radius: 3px;
   border: none;
   cursor: pointer;
+  height: 2.6rem;
 }
 ::placeholder {
   color: var(--color0);
+}
+
+#errorMessage {
+  color: #005178;
+  font-size: 1.4rem;
 }
 
 /* CARD DE VISUALIZAÇÃO DOS PRODUTOS */
@@ -154,6 +157,10 @@ div.Home {
 }
 
 /*  Container que irá receber os cartões */
+.text_ProdutosLista_container {
+  font-size: 3rem;
+}
+
 #produtosListaItem {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -247,7 +254,7 @@ div.Home {
   border: none;
   background: #0092ca;
   color: white;
-  color: --;
+  cursor: pointer;
 }
 
 /* MODAL */
@@ -401,9 +408,9 @@ div.Home {
   display: none;
   justify-content: center;
   align-items: center;
-  width: 25vw;
+  width: 30vw;
   max-width: 50vw;
-  height: 5vh;
+  height: 7vh;
   justify-content: space-evenly;
   background-color: #0092ca;
   border-radius: 1rem;
@@ -411,14 +418,36 @@ div.Home {
   bottom: 1rem;
   left: 50%;
   transform: translate(-50%, -50%);
+  border: 2px outset #005178;
+  animation: surgir 4s normal;
 }
-.notificacaoSpan {
+#notificacaoSpan {
+  color: white;
+  font-size: 25px;
 }
-.notificacaoP {
+#notificacaoP {
+  font-weight: 600;
+  color: white;
+  font-size: 18px;
 }
 
 .notificacao-span-sucesso {
 }
 
 .notificacao-span-erro {
+}
+
+@keyframes surgir {
+  0% {
+    left: -200px;
+  }
+  30% {
+    left: 50%;
+  }
+  80% {
+    left: 45%;
+  }
+  100% {
+    left: 250%;
+  }
 }

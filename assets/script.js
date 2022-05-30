@@ -117,7 +117,7 @@ const imprmirProdutoPorId = async () => {
     const errorMessage = document.createElement("p");
     errorMessage.id = "errorMessage";
     errorMessage.classList.add("ErrorMessage");
-    errorMessage.innerHTML = "Produto não encontrado.";
+    errorMessage.innerHTML = "Empreendimento não encontrado, verifique se o nome está igual...";
 
     document.querySelector("#produto_escolhido").appendChild(errorMessage);
     setTimeout(() => {
@@ -192,7 +192,7 @@ const mostrarModalCriacao = () => {
 
 const mostrarModalExclusao = (id) => {
   document.querySelector("#fundoModalExclusao").style.display = "flex";
-
+  console.log(id);
   const botaoConfirmar = document.querySelector("#botaoConfirmarExclusao");
 
   botaoConfirmar.addEventListener("click", async () => {
@@ -203,7 +203,6 @@ const mostrarModalExclusao = (id) => {
     } else {
       mostrarNotificacao("erro", "Produto não encontrado");
     }
-
     document.querySelector("#produto_escolhido").innerHTML = "";
 
     esconderModalExclusao();
@@ -224,28 +223,30 @@ const mostrarModalEdicao = (id) => {
 
   const btnAtualizar = document.querySelector("#botaoConfirmarEdicao");
 
-  btnAtualizar.addEventListener("click", async () => {
+  btnAtualizar.addEventListener("click", async function atualizar() {
     const nome = document.querySelector("#inputNomeEdicao").value;
     const descricao = document.querySelector("#inputDescricaoEdicao").value;
     const foto = document.querySelector("#inputFotoEdicao").value;
 
     await requisicoes.atualizarProduto(id, nome, descricao, foto);
 
-    mostrarNotificacao("sucess", "Empreendimento atualizado.");
+    this.removeEventListener("click", atualizar);
+
+    mostrarNotificacao("sucesso", "Empreendimento atualizado.");
     esconderModalEdicao();
     imprimirTodosProdutos();
   });
 };
 
 const mostrarNotificacao = (tipo, frase) => {
-  const notificacaoP = document.querySelector("#notificacaoSpan");
-  const notificacaoSpan = document.querySelector("#notificacaoP");
+  const notificacaoP = document.querySelector("#notificacaoP");
+  const notificacaoSpan = document.querySelector("#notificacaoSpan");
 
   if (tipo === "sucesso") {
-    notificacaoSpan.innerText = "V";
+    notificacaoSpan.innerHTML = '<i class="fa-solid fa-check"></i>';
     notificacaoSpan.classList.add("notificacao_span_sucesso");
   } else if (tipo === "erro") {
-    notificacaoSpan.innerText = "X";
+    notificacaoSpan.innerText = '<i class="fa-solid fa-circle-xmark"></i>';
     notificacaoSpan.classList.add("notificacao_span_erro");
   }
   notificacaoP.innerText = frase;
