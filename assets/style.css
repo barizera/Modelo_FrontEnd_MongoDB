@@ -253,11 +253,10 @@ div.Home {
 }
 
 .CartaoProdutos__infos div:nth-child(2) {
-  font: 17px var(--font2);
+  font: 15px var(--font2);
   margin-top: 0.4rem;
   font-weight: 600;
 }
-
 
 .btn_container a {
   height: 10%;
