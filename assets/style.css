@@ -103,6 +103,11 @@ div.Home {
   width: 25%;
 }
 
+.botao-cadastro:hover {
+  transform: scale(1.1);
+  transition: 0.6s ease-in-out;
+}
+
 /*  PESQUISAR PRODUTO */
 
 .Produto_escolhido_container {
@@ -136,6 +141,13 @@ div.Home {
   border: none;
   cursor: pointer;
   height: 2.6rem;
+  width: 5rem;
+}
+
+.btn_pesquisar:hover {
+  background-color: #71b536;
+  transition: 0.6s ease-in-out;
+  color: #005178;
 }
 ::placeholder {
   color: var(--color0);
@@ -225,19 +237,27 @@ div.Home {
   flex-direction: column;
   justify-content: flex-start;
   position: relative;
+  width: 80%;
 }
 
 .CartaoProdutos__infos div:nth-child(1) {
-  color: #005178;
-  font-size: 20px;
+  margin-top: 1rem;
+  width: 100%;
+  font-size: 15px;
   margin-bottom: 5px;
+  color: #005178;
   font-family: var(--font2);
+  font-weight: 800;
+  background-color: #fdfdfd86;
+  border-radius: 0.7rem;
 }
 
-/* .CartaoProdutos__infos div:nth-child(2) {
-  color: #005178;
-  font-size: 12px;
-} */
+.CartaoProdutos__infos div:nth-child(2) {
+  font: 17px var(--font2);
+  margin-top: 0.4rem;
+  font-weight: 600;
+}
+
 
 .btn_container a {
   height: 10%;
@@ -249,7 +269,6 @@ div.Home {
 .botao-excluir-produtos,
 .botao-editar-produtos {
   padding: 10px 30px;
-
   border-radius: 5px;
   border: none;
   background: #0092ca;
@@ -257,6 +276,15 @@ div.Home {
   cursor: pointer;
 }
 
+.botao-excluir-produtos:hover {
+  background-color: rgb(211, 54, 54);
+  transition: 0.6s ease-in-out;
+}
+
+.botao-editar-produtos:hover {
+  background-color: #7de8fe;
+  transition: 0.6s ease-in-out;
+}
 /* MODAL */
 
 .fundo-modal {
